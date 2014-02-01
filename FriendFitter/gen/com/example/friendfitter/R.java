@@ -13,21 +13,26 @@ public final class R {
     public static final class drawable {
         public static final int default_bg=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int text_input_border=0x7f020002;
+        public static final int megamanderp=0x7f020002;
+        public static final int text_input_border=0x7f020003;
     }
     public static final class id {
+        public static final int cameraBt=0x7f07000f;
         public static final int groupNameet=0x7f070002;
         public static final int groupNametv=0x7f070001;
         public static final int loginbt=0x7f070007;
-        public static final int menu_settings=0x7f07000c;
+        public static final int menu_settings=0x7f070010;
         public static final int nameet=0x7f070006;
         public static final int nametv=0x7f070005;
         public static final int ortv=0x7f070008;
         public static final int passwordet=0x7f070004;
         public static final int passwordtv=0x7f070003;
+        public static final int photoIv=0x7f07000c;
         public static final int photoStreambt=0x7f07000b;
         public static final int registerbt=0x7f070009;
         public static final int takePhotobt=0x7f07000a;
+        public static final int uploadServerBt=0x7f07000e;
+        public static final int uploadphnBt=0x7f07000d;
         public static final int welcometv=0x7f070000;
     }
     public static final class layout {
