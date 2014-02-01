@@ -31,7 +31,7 @@
     <EditText
         android:id="@+id/groupNameet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="@drawable/text_input_border"
         android:ems="10" >
 
@@ -49,15 +49,15 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="@drawable/text_input_border"
         android:ems="10"
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/nameet"
+        android:id="@+id/nametv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -67,11 +67,35 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/nameet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_height="30dp"
         android:background="@drawable/text_input_border"
+        android:ems="10"
         android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/loginbt"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Login"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/ortv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Or"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/registerbt"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Regista yo" />
 
 </LinearLayout>
