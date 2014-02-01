@@ -27,28 +27,28 @@ public class Login extends Activity implements View.OnClickListener {
 	EditText group, password, name;
 	String groupS, passwordS, nameS;
 
-	 // Progress Dialog
-   	 private ProgressDialog pDialog;
+	// Progress Dialog
+	private ProgressDialog pDialog;
 
-	 // JSON parser class
-   	 JSONParser jsonParser = new JSONParser();
+	// JSON parser class
+	JSONParser jsonParser = new JSONParser();
 
-   	 //php login script location:
+	// php login script location:
 
-   	 //localhost :
-    	//testing on your device
-   	//put your local ip instead,  on windows, run CMD > ipconfig
-	//or in mac's terminal type ifconfig and look for the ip under en0 or en1
-   	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
+	// localhost :
+	// testing on your device
+	// put your local ip instead, on windows, run CMD > ipconfig
+	// or in mac's terminal type ifconfig and look for the ip under en0 or en1
+	// private static final String LOGIN_URL =
+	// "http://xxx.xxx.x.x:1234/webservice/login.php";
 
-   	//testing on Emulator:
-    	private static final String LOGIN_URL = "http://128.237.201.225:1234/friend_fitter/index.php";
+	// testing on Emulator:
+	private static final String LOGIN_URL = "http://128.237.201.225/friend_fitter/index.php";
 
-	//JSON element ids from repsonse of php script:
-    	private static final String TAG_SUCCESS = "success";
-   	private static final String TAG_MESSAGE = "message";
+	// JSON element ids from repsonse of php script:
+	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MESSAGE = "message";
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,21 +73,12 @@ public class Login extends Activity implements View.OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case (R.id.loginbt):
-			// The variables will contain the string corresponding to input fields
+			// The variables will contain the string corresponding to input
+			// fields
 			groupS = group.getText().toString();
 			passwordS = password.getText().toString();
 			nameS = name.getText().toString();
-			// So guys, this login right now just leads straight to the main menu
-			// we can change to to only go to the enu conditionally
-			try {
-
-				new AttemptLogin().execute();
-
-
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			new AttemptLogin().execute();
 			break;
 		case (R.id.registerbt):
 			break;
@@ -102,85 +93,80 @@ public class Login extends Activity implements View.OnClickListener {
 		finish();
 	}
 
+	class AttemptLogin extends AsyncTask<String, String, String> {
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		boolean failure = false;
 
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(Login.this);
+			pDialog.setMessage("Attempting login...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
 
+		@Override
+		protected String doInBackground(String... args) {
+			// TODO Auto-generated method stub
+			// Check for success tag
+			int success;
+			// CHANGED THIS TO MATCH OUR IMPLEMENTATION
+			String groupName = group.getText().toString();
+			String passwordName = password.getText().toString();
+			String Name = name.getText().toString();
 
-class AttemptLogin extends AsyncTask<String, String, String> {
-         /**
-         * Before starting background thread Show Progress Dialog
-         * */
-        boolean failure = false;
+			try {
+				// Building Parameters
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("groupname", groupName));
+				params.add(new BasicNameValuePair("username", Name));
+				params.add(new BasicNameValuePair("password", passwordName));
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-           pDialog = new ProgressDialog(Login.this);
-            pDialog.setMessage("Attempting login...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
+				Log.d("request!", "starting");
+				// getting product details by making HTTP request
+				JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "POST",
+						params);
+				// check your log for json response
+				Log.d("Login attempt", json.toString());
 
- 	@Override
-        protected String doInBackground(String... args) {
-            // TODO Auto-generated method stub
-             // Check for success tag
-            int success;
-	//CHANGED THIS TO MATCH OUR IMPLEMENTATION
-            String groupName = group.getText().toString();
-            String passwordName = password.getText().toString();
-	    String Name = name.getText().toString();
+				// json success tag
+				success = json.getInt(TAG_SUCCESS);
+				if (success == 1) {
+					Log.d("Login Successful!", json.toString());
 
+					// CHANGED FOR OUR IMPLEMENTATION
+					Class mainMenu = Class
+							.forName("com.example.friendfitter.Menu");
+					Intent menuIntent = new Intent(Login.this, mainMenu);
+					startActivity(menuIntent);
+					return json.getString(TAG_MESSAGE);
+				} else {
+					Log.d("Login Failure!", json.getString(TAG_MESSAGE));
+					return json.getString(TAG_MESSAGE);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 
-            try {
-                // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair(“groupname”, groupName));
-                params.add(new BasicNameValuePair("username", Name));
-                params.add(new BasicNameValuePair("password", passwordName));
-		
-
-                Log.d("request!", "starting");
-                // getting product details by making HTTP request
-                JSONObject json = jsonParser.makeHttpRequest(
-                       LOGIN_URL, "POST", params);
-                // check your log for json response
-                Log.d("Login attempt", json.toString());
-
-                // json success tag
-                success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
-                    Log.d("Login Successful!", json.toString());
-                    
-			//CHANGED FOR OUR IMPLEMENTATION
-			Class mainMenu = Class.forName("com.example.friendfitter.Menu");
-			Intent menuIntent = new Intent(Login.this, mainMenu);	
-			startActivity(menuIntent);
-                 	return json.getString(TAG_MESSAGE);
-                }
-		else{
-                    Log.d("Login Failure!", json.getString(TAG_MESSAGE));
-                    return json.getString(TAG_MESSAGE);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-	/**
-         * After completing background task Dismiss the progress dialog
-         * **/
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog once product deleted
-            pDialog.dismiss();
-            if (file_url != null){
-                Toast.makeText(Login.this, file_url, Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product deleted
+			pDialog.dismiss();
+			if (file_url != null) {
+				Toast.makeText(Login.this, file_url, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 
 }
-
