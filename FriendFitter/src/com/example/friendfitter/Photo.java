@@ -1,11 +1,14 @@
 package com.example.friendfitter;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +21,7 @@ public class Photo extends Activity implements View.OnClickListener {
 	Button pushPic;
 	Button camera;
 	Intent leIntent;
+	int galOrCam = 0; // 0 for camera, 1 for gallery
 	ImageView iv;
 	Bitmap bmp;
 	final static int cameraData = 0; // this is
@@ -29,9 +33,10 @@ public class Photo extends Activity implements View.OnClickListener {
 		setContentView(R.layout.photo);
 		instantiateVars();
 		// dims the background
-		//WindowManager.LayoutParams windowManager = getWindow().getAttributes();
-		//windowManager.dimAmount = 0.50f;
-		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		// WindowManager.LayoutParams windowManager =
+		// getWindow().getAttributes();
+		// windowManager.dimAmount = 0.50f;
+		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
 		// default picture to upload
 		InputStream is = getResources().openRawResource(R.drawable.megamanderp);
@@ -56,15 +61,18 @@ public class Photo extends Activity implements View.OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case (R.id.uploadphnBt):
-			leIntent = new Intent(Intent.ACTION_PICK);
-			leIntent.setType("image/*");
-			startActivityForResult(leIntent, 0);
+			leIntent = new Intent(
+					Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			galOrCam = 1;
+			startActivityForResult(leIntent, cameraData);
 			break;
 		case (R.id.uploadServerBt):
 			break;
 		case (R.id.cameraBt):
 			leIntent = new Intent(
 					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+			galOrCam = 0;
 			startActivityForResult(leIntent, cameraData);
 			break;
 		}
@@ -76,9 +84,24 @@ public class Photo extends Activity implements View.OnClickListener {
 		// this method should be used whenever startActivityForResult is used
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK) {
-			Bundle extras = data.getExtras();
-			// data in this is just a key reference called data
-			bmp = (Bitmap) extras.get("data");
+			if (galOrCam == 1) { // gallery is accessed
+				Uri targetUri = data.getData();
+				//The matrix stuff is a temporary solution for glitch in uploading from gallery
+				//(image is uploaded as rotated)
+				Matrix matrix = new Matrix();
+				matrix.postRotate(90);
+				try {
+					Bitmap rotatedBitmap = BitmapFactory.decodeStream(getContentResolver()
+							.openInputStream(targetUri));
+					bmp = Bitmap.createBitmap(rotatedBitmap, 0, 0, rotatedBitmap.getWidth(), rotatedBitmap.getHeight(), matrix, true);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else { // if camera is active
+				Bundle extras = data.getExtras();
+				bmp = (Bitmap) extras.get("data");
+			}
 			iv.setImageBitmap(bmp);
 		}
 	}
