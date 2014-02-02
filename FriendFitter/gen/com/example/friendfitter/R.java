@@ -17,7 +17,7 @@ public final class R {
         public static final int text_input_border=0x7f020003;
     }
     public static final class id {
-        public static final int cameraBt=0x7f07000f;
+        public static final int cameraBt=0x7f07000d;
         public static final int groupNameet=0x7f070002;
         public static final int groupNametv=0x7f070001;
         public static final int loginbt=0x7f070007;
@@ -32,7 +32,7 @@ public final class R {
         public static final int registerbt=0x7f070009;
         public static final int takePhotobt=0x7f07000a;
         public static final int uploadServerBt=0x7f07000e;
-        public static final int uploadphnBt=0x7f07000d;
+        public static final int uploadphnBt=0x7f07000f;
         public static final int welcometv=0x7f070000;
     }
     public static final class layout {

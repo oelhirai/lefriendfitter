@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -18,6 +22,11 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import android.util.Log;
  
 public class JSONParser {
@@ -101,7 +110,7 @@ public class JSONParser {
  
             // check for request method
             if(method == "POST"){
-            	System.out.println("Going into POST");
+            	System.out.println("G");
 
                 // request method is POST
                 // defaultHttpClient
@@ -114,8 +123,6 @@ public class JSONParser {
                 is = httpEntity.getContent();
  
             }else if(method == "GET"){
-            	System.out.println("Going into GET");
-
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");
@@ -151,6 +158,7 @@ public class JSONParser {
  
         // try parse the string to a JSON object
         try {
+        	System.out.println(json);
             jObj = new JSONObject(json);
         } catch (JSONException e) {
         	System.out.println("Hit mai yooooooooooooo!");

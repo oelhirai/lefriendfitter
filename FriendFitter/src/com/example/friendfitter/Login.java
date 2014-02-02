@@ -43,7 +43,7 @@ public class Login extends Activity implements View.OnClickListener {
 	// "http://xxx.xxx.x.x:1234/webservice/login.php";
 
 	// testing on Emulator:
-	private static final String LOGIN_URL = "http://128.237.201.225/friend_fitter/index.php";
+	private static final String LOGIN_URL = "http://128.237.201.225/friend_fitter/login.php";
 
 	// JSON element ids from repsonse of php script:
 	private static final String TAG_SUCCESS = "success";
@@ -75,11 +75,19 @@ public class Login extends Activity implements View.OnClickListener {
 		case (R.id.loginbt):
 			// The variables will contain the string corresponding to input
 			// fields
-			groupS = group.getText().toString();
-			passwordS = password.getText().toString();
-			nameS = name.getText().toString();
+			//groupS = group.getText().toString();
+			//passwordS = password.getText().toString();
+			//nameS = name.getText().toString();
 			new AttemptLogin().execute();
-			break;
+			/*try {
+				Class mainMenu = Class.forName("com.example.friendfitter.Menu");
+				Intent menuIntent = new Intent(Login.this, mainMenu);
+				startActivity(menuIntent);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;*/
 		case (R.id.registerbt):
 			break;
 		}
@@ -115,9 +123,9 @@ public class Login extends Activity implements View.OnClickListener {
 			// Check for success tag
 			int success;
 			// CHANGED THIS TO MATCH OUR IMPLEMENTATION
-			String groupName = group.getText().toString();
-			String passwordName = password.getText().toString();
-			String Name = name.getText().toString();
+			String groupName = "a"; //group.getText().toString();
+			String passwordName = "tartanhacks";//password.getText().toString();
+			String Name = "friend_fitter"; //name.getText().toString();
 
 			try {
 				// Building Parameters
