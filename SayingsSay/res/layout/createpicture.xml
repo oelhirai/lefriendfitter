@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/default_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <com.example.sayingsays.TouchImageView
+        android:id="@+id/photoIv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.41"
+        android:background="#ee000000"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="3" >
+
+        <Button
+            android:id="@+id/cameraBt"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/second_input_border"
+            android:text="Camera"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/wallpaperBt"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/second_input_border"
+            android:text="Make Wallpaper"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/uploadphnBt"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/second_input_border"
+            android:text="Gallery"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>

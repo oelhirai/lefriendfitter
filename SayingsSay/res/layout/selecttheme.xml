@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/default_bg"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/dogThemeBt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="97dp"
+        android:layout_marginLeft="38dp"
+        android:layout_weight="1"
+        android:background="@drawable/dog_icon"
+        android:text="Dogs"
+        android:src="@drawable/second_input_border" />
+
+    <ImageButton
+        android:id="@+id/natureThemeBt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/cityThemeBt"
+        android:layout_marginLeft="80dp"
+        android:layout_toRightOf="@+id/dogThemeBt"
+        android:layout_weight="1"
+        android:background="@drawable/nature_icon"
+        android:src="@drawable/second_input_border" />
+
+    <ImageButton
+        android:id="@+id/movieThemeBt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/natureThemeBt"
+        android:layout_alignTop="@+id/dogThemeBt"
+        android:layout_marginLeft="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/movie_icon"
+        android:src="@drawable/second_input_border"
+        android:text="Movies" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/natureThemeBt"
+        android:layout_below="@+id/natureThemeBt"
+        android:layout_marginRight="20dp"
+        android:text="Nature"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/movieThemeBt"
+        android:text="Movies"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/textView3"
+        android:text="City"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Themes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#33ffffff"
+        android:textSize="96sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignRight="@+id/dogThemeBt"
+        android:layout_marginRight="28dp"
+        android:text="Dogs"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <ImageButton
+        android:id="@+id/cityThemeBt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/textView5"
+        android:layout_alignLeft="@+id/dogThemeBt"
+        android:layout_weight="1"
+        android:background="@drawable/city_icon"
+        android:src="@drawable/second_input_border"
+        android:text="Cityscape" />
+
+</RelativeLayout>
