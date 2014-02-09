@@ -1,0 +1,5 @@
+lefriendfitter
+==============
+Created during the 24 hour period at TartanHacks. FriendFitter was an initial idea our team had in which we would allow users to, in an android app, get suggestions on what to dress based on what others are dressing using image manipulation but the idea was scrapped due to server debugging issues. 
+
+We have instead elected to create Sayings Say (and elected to rename it Wallspiration, unofficially). The main function of the app is to boost morale by enabling the user to take photos/upload photos of something they love and attach a quote of their liking to the image with full customizations (ability to choose color of text and location, we did not have the resources to fully implement this feature in the time span). Also, we've added a feature in which the user may choose a theme of wallpapers (nature themed, cityscapes etc.) and our plan was to have the wallpapers revolve on a daily basis according to the theme (We did not fully implement the rotation). The last feature we implemented was basically a quote retriever. This feature fetches random inspirational quotes and displays it to the user.
